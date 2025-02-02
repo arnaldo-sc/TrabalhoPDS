@@ -22,6 +22,18 @@ void gerarArquivoCSVLegumes(const std::vector<Legumes>& listaLegumes) {
     arquivo.close();
 }
 
+void gerarArquivoCSVCarnes(const std::vector<Carnes>& listaCarnes) {
+    std::ofstream arquivo("carnesResultado.csv");
+    for (const auto& carne : listaCarnes) {
+       arquivo << "Nome: " << carne.getNome() << " ; Preço Atual: " 
+        << carne.getValor_atual() << " ; Preço Anterior: " 
+        << carne.getValor_anterior() << " ; Variação do preço: "
+        << carne.calcularVariacao() << "%" << std::endl;
+    }
+    arquivo.close();
+}
+
+
 void gerarArquivoCSVLaticinios(const std::vector<Laticinios>& listaLaticinios) {
     std::ofstream arquivo("laticiniosResultado.csv");
     for (const auto& item : listaLaticinios) {
@@ -33,19 +45,26 @@ void gerarArquivoCSVLaticinios(const std::vector<Laticinios>& listaLaticinios) {
     arquivo.close();
 }
 
+
 //Essa função vai gerar um arquivo que vai conter a maior e a menor variacao de cada uma das classes
-void gerarArquivoCSVMaiorMenorAumento(const std::vector<Legumes>& listaLegumes, const std::vector<Laticinios>& listaLaticinios) {
+void gerarArquivoCSVMaiorMenorAumento(const std::vector<Legumes>& listaLegumes, const std::vector<Carnes>& listaCarnes, const std::vector<Laticinios>& listaLaticinios) {
     std::ofstream arquivo("maior_menor_aumento.csv");
 
     Legumes maiorLegume("", 0, 0), menorLegume("", 0, 0);
     Legumes::encontrarMaiorMenorVariacao(listaLegumes, maiorLegume, menorLegume);
     Laticinios maiorLaticinio("", 0, 0), menorLaticinio("", 0, 0);
     Laticinios::encontrarExtremos(listaLaticinios, maiorLaticinio, menorLaticinio);
+    Carnes maiorCarne("", 0, 0), menorCarne("", 0, 0);
+    Carnes::encontrarMaiorMenorVariacao(listaCarnes, maiorCarne, menorCarne);
     
     arquivo << "Legumes - Maior Aumento: " << maiorLegume.getNome() << " - " 
             << maiorLegume.variacaoPreco() << "%" << std::endl;
     arquivo << "Legumes - Menor Aumento: " << menorLegume.getNome() << " - " 
             << menorLegume.variacaoPreco() << "%" << std::endl;
+    arquivo << "Carnes - Maior Aumento: " << maiorCarne.getNome() << " - " 
+            << maiorCarne.calcularVariacao() << "%" << std::endl;
+    arquivo << "Carnes - Menor Aumento: " << menorCarne.getNome() << " - " 
+            << menorCarne.calcularVariacao() << "%" << std::endl;   
     arquivo << "Laticinios - Maior Aumento: " << maiorLaticinio.getNomeProduto() << " - " 
             << maiorLaticinio.calcularVariacao() << "%" << std::endl;
     arquivo << "Laticinios - Menor Aumento: " << menorLaticinio.getNomeProduto() << " - " 
@@ -60,7 +79,7 @@ void exibirMenu() {
     
     std::vector<Legumes> listaLegumes; // tem que inicializar as outras listas de produtos aqui também
     std::vector<Laticinios> listaLaticinios;
-
+    std::vector<Carnes> listaCarnes;
 
     do {
         std::cout << "Menu:\n";
@@ -81,8 +100,8 @@ switch (escolha) {
                 break;
             }
             case 2: {
-                
-
+                listaCarnes = Carnes::lerArquivoCSV("carnes.csv");
+                gerarArquivoCSVCarnes(listaCarnes);
                 break;
             }
             case 3: {
@@ -91,7 +110,7 @@ switch (escolha) {
                 break;
             }
             case 4: {
-                // funcao bebidas
+                
                 break;
             }
             case 5: {
@@ -104,8 +123,8 @@ switch (escolha) {
                 // colocar as listas de todas as classes nos parametros da função, por enquanto tá só a dos legumes
                 listaLegumes = Legumes::lerArquivoCSV("legumes.csv");
                 listaLaticinios = Laticinios::carregarDadosCSV("laticinios.csv");
-                gerarArquivoCSVMaiorMenorAumento(listaLegumes, listaLaticinios);
-
+                listaCarnes = Carnes::lerArquivoCSV("carnes.csv");
+                gerarArquivoCSVMaiorMenorAumento(listaLegumes, listaCarnes, listaLaticinios);
                 break;
             }
             case 0: {

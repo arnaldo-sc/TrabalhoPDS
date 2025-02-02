@@ -58,10 +58,10 @@ vector<Carnes> Carnes::lerArquivoCSV(std::string nomeArquivo) {
 void Carnes::encontrarMaiorMenorVariacao(const vector<Carnes>& lista, Carnes& maiorCarne, Carnes& menorCarne) {
     for (const Carnes& carne : lista) {  // Para não modificar a lista
         if (carne.calcularVariacao() > maiorCarne.calcularVariacao()) {
-            maior_carne = carne;
+            maiorCarne = carne;
         }
         if (carne.calcularVariacao() < menorCarne.calcularVariacao()) {
-            menor_carne = carne;
+            menorCarne = carne;
         }
     }
 }

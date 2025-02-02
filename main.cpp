@@ -7,6 +7,7 @@
 
 #include "legumes.hpp"  // Incluir as outras classes aqui também
 #include "Carnes.hpp"
+#include "bebidas.hpp"
 
 //essa funcao aqui vai mostrar a variacao e os dados da classes legume
 void gerarArquivoCSVLegumes(const std::vector<Legumes>& listaLegumes) {

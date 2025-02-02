@@ -2,7 +2,7 @@
 
 // Inicializando o construtor com os atributos necessários
 Laticinios::Laticinios(string _nome, float _precoAtual, float _precoAnterior) {
-    nome = _nome;
+    nomeProduto = _nome;
     precoAtual = _precoAtual;
     precoAnterior = _precoAnterior;
 }
@@ -14,8 +14,8 @@ float Laticinios::calcularVariacao() const {
 }
 
 // Métodos para obter os atributos privados
-string Laticinios::getNome() const {
-    return nome;
+string Laticinios::getNomeProduto() const {
+    return nomeProduto;
 }
 
 float Laticinios::getPrecoAtual() const {
@@ -28,14 +28,14 @@ float Laticinios::getPrecoAnterior() const {
 
 // Lê um arquivo CSV contendo informações sobre os laticínios e retorna um vetor de objetos
 vector<Laticinios> Laticinios::carregarDadosCSV(string nomeArquivo) {
-    vector<Laticinios> listaLaticinios;
+    vector<Laticinios> laticinios;
     ifstream arquivo(nomeArquivo);
-    string linha, nome;
+    string linha, nomeProduto;
     float precoAtual, precoAnterior;
 
     if (!arquivo.is_open()) {
         cerr << "Erro ao abrir o arquivo " << nomeArquivo << endl;
-        return listaLaticinios;
+        return laticinios;
     }
 
     // Ignora o cabeçalho
@@ -44,27 +44,27 @@ vector<Laticinios> Laticinios::carregarDadosCSV(string nomeArquivo) {
     // Lê cada linha do arquivo CSV e extrai os dados
     while (getline(arquivo, linha)) {
         stringstream ss(linha);
-        getline(ss, nome, ';');
+        getline(ss, nomeProduto, ';');
         ss >> precoAtual;
         ss.ignore(); // Ignora o separador
         ss >> precoAnterior;
 
         // Adiciona um objeto Laticinios ao vetor
-        listaLaticinios.emplace_back(nome, precoAtual, precoAnterior);
+        laticinios.emplace_back(nomeProduto, precoAtual, precoAnterior);
     }
 
     arquivo.close(); // Fecha o arquivo após a leitura
-    return listaLaticinios;
+    return laticinios;
 }
 
 // Identifica os laticínios com maior e menor variação de preço dentro de uma lista
-void Laticinios::encontrarExtremos(const vector<Laticinios>& lista, Laticinios& maior, Laticinios& menor) {
+void Laticinios::encontrarExtremos(const vector<Laticinios>& lista, Laticinios& maiorLaticinio, Laticinios& menorLaticinio) {
     for (const Laticinios& item : lista) {
-        if (item.calcularVariacao() > maior.calcularVariacao()) {
-            maior = item;
+        if (item.calcularVariacao() > maiorLaticinio.calcularVariacao()) {
+            maiorLaticinio = item;
         }
-        if (item.calcularVariacao() < menor.calcularVariacao()) {
-            menor = item;
+        if (item.calcularVariacao() < menorLaticinio.calcularVariacao()) {
+            menorLaticinio = item;
         }
     }
 }

@@ -28,10 +28,10 @@ class Laticinios {
         float getPrecoAnterior() const;
         
         // Método para leitura de arquivo CSV
-        static vector<Laticinios> carregarArquivoCSV(string nomeArquivo);
+        static vector<Laticinios> carregarDadosCSV(string nomeArquivo);
         
         // Método para identificar maior e menor variação de preço
-        static void identificarMaiorMenorVariacao(const vector<Laticinios>& lista, Laticinios& maior, Laticinios& menor);
+        static void encontrarExtremos(const vector<Laticinios>& lista, Laticinios& maiorLaticinio, Laticinios& menorLaticinio);
 };
 
 #endif

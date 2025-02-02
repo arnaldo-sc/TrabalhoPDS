@@ -60,7 +60,24 @@ switch (escolha) {
                 break;
             }
             case 2: {
-                //chamar a função carnes aqui, lembrar de ler o arquivo antes
+                Picanha pi1("Friboi", 100, 120);
+                pi1.GravaInformacao();
+
+                Picanha pi2("Sadia", 122, 102);
+                pi2.GravaInformacao();
+            
+                PeitoDeFrango pe1("Friboi", 20, 30);
+                pe1.GravaInformacao();
+            
+                PeitoDeFrango pe2("Sadia", 22, 32);
+                pe2.GravaInformacao();
+            
+                // Mostra qual produto teve maior aumento e diminuição no txt criado
+                Carnes::MaiorVariacao();
+            
+                // Lê o arquivo criado pelo terminal 
+                Carnes::LeInformacao();
+
                 break;
             }
             case 3: {

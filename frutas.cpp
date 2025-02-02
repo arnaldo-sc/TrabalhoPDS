@@ -57,3 +57,4 @@ void Frutas::MaiorMenorExtremos(const vector<Frutas>& lista, Frutas& maiorFruta,
         }
     }
 }
+

@@ -5,13 +5,14 @@
 #include <fstream>
 #include <sstream>
 
-#include "legumes.hpp"  // Incluir as outras classes aqui também
+//Incluir os arquivos.hpp de todas as classes
+#include "legumes.hpp"  
 #include "Carnes.hpp"
 #include "bebidas.hpp"
 #include "laticinios.hpp"
 #include "frutas.hpp"
 
-//essa funcao aqui vai mostrar a variacao e os dados da classes legume
+//As proximas 5 funções geram os arquivos de cada classse
 void gerarArquivoCSVLegumes(const std::vector<Legumes>& listaLegumes) {
     std::ofstream arquivo("legumesResultado.csv");
     for (const auto& legume : listaLegumes) {
@@ -84,6 +85,7 @@ void gerarArquivoCSVMaiorMenorAumento(const std::vector<Legumes>& listaLegumes, 
     Frutas maiorFruta("", 0, 0), menorFruta("", 0, 0);
     Frutas::MaiorMenorExtremos(listaFrutas, maiorFruta, menorFruta);
     
+    //escrevendo as informações no arquivo
     arquivo << "Legumes - Maior Aumento: " << maiorLegume.getNome() << " - " 
             << maiorLegume.variacaoPreco() << "%" << std::endl;
     arquivo << "Legumes - Menor Aumento: " << menorLegume.getNome() << " - " 
@@ -111,7 +113,7 @@ void exibirMenu() {
     
     int escolha;
     
-    std::vector<Legumes> listaLegumes; // tem que inicializar as outras listas de produtos aqui também
+    std::vector<Legumes> listaLegumes; // declaração das listas
     std::vector<Laticinios> listaLaticinios;
     std::vector<Carnes> listaCarnes;
     std::vector<Bebidas> listaBebidas;
@@ -156,9 +158,9 @@ switch (escolha) {
                 break;
             }
             case 6: {
-                // aqui vai chamar a função que calcula as maiores e menores variações no geral
-                //tem que ler o arquivo de todas as classes antes
-                // colocar as listas de todas as classes nos parametros da função, por enquanto tá só a dos legumes
+                // Aqui vai chamar a função que calcula as maiores e menores variações no geral
+                //Tem que ler o arquivo de todas as classes antes
+                // Colocar as listas de todas as classes nos parametros da função
                 listaLegumes = Legumes::lerArquivoCSV("legumes.csv");
                 listaLaticinios = Laticinios::carregarDadosCSV("laticinios.csv");
                 listaCarnes = Carnes::lerArquivoCSV("carnes.csv");
@@ -183,6 +185,5 @@ int main() {
     
     exibirMenu();  // Chama a função para exibir o menu
     return 0;
-
-    return 0;
+    
 }

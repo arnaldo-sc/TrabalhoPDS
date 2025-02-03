@@ -18,6 +18,16 @@ float Frutas::calcVariacaoPreco() const {
 
 }
 
+string Frutas::getNome() const {
+    return nome;
+}
+float Frutas::getPAtual() const {
+    return pAtual;
+}
+float Frutas::getPAnterior() const {
+    return pAnterior;
+}
+
 vector<Frutas> Frutas::lerArquivoCSV(string nomeArquivo){
 
     vector<Frutas> frutas;  
